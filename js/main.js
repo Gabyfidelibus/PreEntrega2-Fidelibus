@@ -47,4 +47,28 @@ while (numero != 0) {
     numero = prompt("Ingresar un numero (0 para salir)");
 }
 
+// Funcion para calcular el promedio de notas
+function promedio(notas) {
+    let suma = 0, cant = 0;
+    notas.forEach(nota => {
+            suma += nota;
+            cant++
+    });
+    return suma/cant;
+}
 
+// Funcion para ingresar las notas en un array
+function ingresarNotas(){
+    let notas = [];
+    let nota = "";
+    do{
+        nota = prompt("Ingrese la nota (S para salir): ");
+        if (!isNaN(nota)) {
+            notas.push(Number(nota));
+        }
+    } while(!isNaN(nota) || nota.toUpperCase() != 'S');
+    return notas;
+}
+
+// Determinar si aprobo o desaprobo si el promedio es mayor o igual a 7
+(promedio(ingresarNotas()) >= 7) ? console.log("Usted esta Aprobado!") : console.log("Usted esta Desaprobado!");
