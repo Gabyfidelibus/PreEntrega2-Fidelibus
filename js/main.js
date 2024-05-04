@@ -72,3 +72,32 @@ function ingresarNotas(){
 
 // Determinar si aprobo o desaprobo si el promedio es mayor o igual a 7
 (promedio(ingresarNotas()) >= 7) ? console.log("Usted esta Aprobado!") : console.log("Usted esta Desaprobado!");
+
+// Funcion tipo cambiario
+function conversionMoneda(precio, tipo){
+    let resultado = 0;
+    switch (tipo) {
+        case 'dolar':
+            resultado = 'US$ ' + (precio / 1040).toFixed(2);
+            break;
+        case 'euro':
+            resultado = '€ ' + (precio / 1085).toFixed(2);
+            break;
+        case 'libras':
+            resultado = '£ ' + (precio / 1286).toFixed(2);
+            break;
+        case 'yuan':
+            resultado = 'CN¥ ' + (precio / 121.3).toFixed(2);
+            break;
+        case 'yen':
+            resultado = 'JN¥ ' + (precio / 5.74).toFixed(2);
+            break;
+        default:
+            resultado = '$ ' + precio.toFixed(2);
+    }
+    return resultado;
+}
+
+let precio = Number(prompt("Ingresar el precio en pesos"));
+let moneda = prompt("Indicar la moneda deseada (dolar, euro, libras, yuan o yen)").toLowerCase();
+console.log('El precio es de ' + conversionMoneda(precio,moneda));
