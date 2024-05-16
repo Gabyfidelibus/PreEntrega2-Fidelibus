@@ -14,3 +14,4 @@ Además de resolver problemas simples como:
   * Verificar si un número es par o impar
   * Calcular promedios
   * Hacer la conversión de peso argentino a dólar estadounidense, euro, libra esterlina, etc.
+# PreEntrega2-Fidelibus
