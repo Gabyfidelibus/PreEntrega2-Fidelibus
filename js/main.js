@@ -1,79 +1,85 @@
-// Funcion que devuelve un nombre valido ingresado por el usuario
-function ingresarNombre(){
-    let nombre = '';
-    do {
-        nombre = prompt("¿cómo te llamas?");
-    } while (nombre == '')
-    return nombre
+let contenedor_productos = document.querySelector(".contenedor-productos");
+let contenedor_carrito = document.querySelector(".contenedor-carrito");
+
+function agregarProductos(producto) {
+    productoHTML = document.createElement("div");
+    productoHTML.classList.add("producto");
+    productoHTML.setAttribute("id",producto.id);
+    productoHTML.innerHTML =   `<h4>Producto: ${producto.nombre}</h4>
+                                <b>Precio en pesos: $${producto.precio}</b>
+                                <p>Cantidad diponible: ${producto.stock}</p>`;
+    contenedor_productos.appendChild(productoHTML);
 }
 
-// Funcion que imprime un saludo por consola
-const saludo = function(nombre){
-    console.log("Bienvenido a mi sitio web, " + nombre + "!");
-}
+let carrito = [];
 
-console.log("Esta es mi primera pre-entrega");
+const productos =  [{id: "p01", nombre: "iPhone 13", precio: 1000000, stock: 2},
+                    {id: "p02", nombre: "iPhone 14", precio: 1500000, stock: 4},
+                    {id: "p03", nombre: "iPhone 14 pro", precio: 1700000, stock: 5},
+                    {id: "p04", nombre: "iPhone 15", precio: 2000000, stock: 3},
+                    {id: "p05", nombre: "iPhone 15 pro", precio: 2500000, stock: 6},
+                    {id: "p06", nombre: "iPhone 15 pro max", precio: 2800000, stock: 1}];
 
-let nombre = ingresarNombre();
+productos.forEach(producto => {
+    agregarProductos(producto);
+});
 
-saludo(nombre);
-
-alert("Mi sitio web va a ser un e-commerce, esta entrega es solo una muestra de lo que aprendí en mis primeras clases del curso!");
-
-// Funcion que imprime una n cantidad de elementos de la serie de Fibonacci
-function fibonacci(n) {
-    let primero = 0, segundo = 1, res = '';
-    for (let i = 1; i <= n ; i++){
-        res += primero + ' ';
-        let siguiente = primero + segundo;
-        primero = segundo;
-        segundo = siguiente;
-    }
-    console.log(res);
-}
-
-fibonacci(prompt("Ingrese la cantidad de elementos de la serie de Fibonacci: "));
-
-// Funcion para verificar si un numero es par o impar
-const esPar = numero => !(numero%2);
-
-let numero = parseInt(prompt("Ingresar un numero (0 para salir)"));
-while (numero != 0) {
-    if (esPar(numero)){
-        console.log("El numero " + numero + " es par.");
-    } else {
-        console.log("El numero " + numero + " es impar.");
-    }
-    numero = prompt("Ingresar un numero (0 para salir)");
-}
-
-// Funcion para calcular el promedio de notas
-function promedio(notas) {
-    let suma = 0, cant = 0;
-    notas.forEach(nota => {
-            suma += nota;
-            cant++
-    });
-    return suma/cant;
-}
-
-// Funcion para ingresar las notas en un array
-function ingresarNotas(){
-    let notas = [];
-    let nota = "";
-    do{
-        nota = prompt("Ingrese la nota (S para salir): ");
-        if (!isNaN(nota)) {
-            notas.push(Number(nota));
+function agregarAlCarrito(carrito, productos) {
+    let entrada = prompt("Agrega un producto al carrito (escribe su nombre o 'salir' si no quiere agregar mas productos)").toLowerCase();
+    while (entrada != "salir") {
+        indice = productos.findIndex(producto => producto.nombre.toLowerCase() === entrada);
+        if (indice === -1) {
+            console.log("Producto no disponible");
+        } else {
+            let cantidad = Number(prompt("Ingrese la cantidad que desea agregar al carrito"));
+            while (cantidad <= 0 || cantidad > productos[indice].stock) {
+                console.log(`Ingrese un numero entre 1 y ${productos[indice].stock}`);
+                cantidad = Number(prompt("Ingrese la cantidad que desea agregar al carrito"));
+            }
+            indiceCarrito = carrito.findIndex(producto => producto.nombre.toLowerCase() === entrada);
+            productos[indice].stock -= cantidad;
+            if (indiceCarrito === -1) {
+                carrito.push({nombre: productos[indice].nombre, precio: productos[indice].precio, cantidad: cantidad});
+            } else {
+                carrito[indiceCarrito].cantidad += cantidad;
+            }
         }
-    } while(!isNaN(nota) || nota.toUpperCase() != 'S');
-    return notas;
+        entrada = prompt("Agrega un producto al carrito (escribe su nombre o 'salir' si no quiere agregar mas productos)").toLowerCase();
+    }
 }
 
-// Determinar si aprobo o desaprobo si el promedio es mayor o igual a 7
-(promedio(ingresarNotas()) >= 7) ? console.log("Usted esta Aprobado!") : console.log("Usted esta Desaprobado!");
+function mostrarCarrito(producto) {
+    productoHTML = document.createElement("div");
+    productoHTML.classList.add("producto");
+    productoHTML.innerHTML =   `<h4>Producto: ${producto.nombre}</h4>
+                                <b>Precio en pesos: $${producto.precio}</b>
+                                <p>Cantidad: ${producto.cantidad}</p>`;
+    contenedor_productos.appendChild(productoHTML);
+}
+
+function sumarTotal(carrito) {
+    let total = 0;
+    total = carrito.reduce((acumulador, producto) => acumulador + producto.precio * producto.cantidad, 0);
+    return total;
+}
+
+document.addEventListener("DOMContentLoaded", () =>{
+    agregarAlCarrito(carrito, productos);
+
+    carritoHTML = document.createElement("h3");
+    carritoHTML.innerText = "CARRITO";
+    contenedor_productos.appendChild(carritoHTML);
+    carrito.forEach(producto => {
+        mostrarCarrito(producto);
+    });
+    totalHTML = document.createElement("h4");
+    totalHTML.innerText = `TOTAL $${sumarTotal(carrito)}`;
+    contenedor_productos.appendChild(totalHTML);
+
+});
 
 // Funcion tipo cambiario
+/*
 function conversionMoneda(precio, tipo){
     let resultado = 0;
     switch (tipo) {
@@ -101,3 +107,4 @@ function conversionMoneda(precio, tipo){
 let precio = Number(prompt("Ingresar el precio en pesos"));
 let moneda = prompt("Indicar la moneda deseada (dolar, euro, libras, yuan o yen)").toLowerCase();
 console.log('El precio es de ' + conversionMoneda(precio,moneda));
+*/
