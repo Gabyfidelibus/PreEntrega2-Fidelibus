@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    margin: 20px;
+
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.contenedor-principal {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 400px 400px;
+    justify-content: space-evenly;
+}
+
+.contenedor-carrito, .contenedor-productos {
+    margin: 10px;
+    padding: 15px;
+    background-color: #dadada;
+    border-radius: 20px;
+}
+
+h3 {
+    margin: 10px 20px 15px;
+    font-size: 20px;
+}
+
+.producto {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+}

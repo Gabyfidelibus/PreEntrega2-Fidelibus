@@ -54,7 +54,7 @@ function mostrarCarrito(producto) {
     productoHTML.innerHTML =   `<h4>Producto: ${producto.nombre}</h4>
                                 <b>Precio en pesos: $${producto.precio}</b>
                                 <p>Cantidad: ${producto.cantidad}</p>`;
-    contenedor_productos.appendChild(productoHTML);
+    contenedor_carrito.appendChild(productoHTML);
 }
 
 function sumarTotal(carrito) {
@@ -63,20 +63,16 @@ function sumarTotal(carrito) {
     return total;
 }
 
-document.addEventListener("DOMContentLoaded", () =>{
+setTimeout(() => {
     agregarAlCarrito(carrito, productos);
 
-    carritoHTML = document.createElement("h3");
-    carritoHTML.innerText = "CARRITO";
-    contenedor_productos.appendChild(carritoHTML);
     carrito.forEach(producto => {
         mostrarCarrito(producto);
     });
     totalHTML = document.createElement("h4");
     totalHTML.innerText = `TOTAL $${sumarTotal(carrito)}`;
-    contenedor_productos.appendChild(totalHTML);
-
-});
+    contenedor_carrito.appendChild(totalHTML);
+}, 200);
 
 // Funcion tipo cambiario
 /*
