@@ -10,39 +10,91 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(35, 40, 50);
+    color: #d3d3d3;
 }
 
 h1 {
+    font-size: 30px;
     margin: 20px;
-
 }
 
 h2 {
     margin-bottom: 10px;
+    font-size: 40px;
+    text-shadow: 1px 1px 10px rgb(124, 128, 141);
 }
 
 .contenedor-principal {
     width: 100%;
-    display: grid;
-    grid-template-columns: 400px 400px;
+    margin-top: 30px;
+    display: flex;
     justify-content: space-evenly;
 }
 
 .contenedor-carrito, .contenedor-productos {
+    min-width: 300px;
+    width: 35%;
+    min-height: 300px;
+    height: max-content;
     margin: 10px;
     padding: 15px;
-    background-color: #dadada;
+    background-color: #1a1a1b;
     border-radius: 20px;
+    box-shadow: 0 0 15px #000;
 }
 
 h3 {
     margin: 10px 20px 15px;
-    font-size: 20px;
+    font-size: 23px;
 }
 
 .producto {
-    margin-bottom: 5px;
+    position: relative;
+    margin-bottom: 10px;
     padding: 10px;
-    background-color: #fff;
+    background-color: #5e616e;
     border-radius: 10px;
+}
+
+.producto h4 {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.producto b {
+    font-size: 18px;
+}
+
+.producto p {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.producto button {
+    font-size: 30px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.producto button:hover {
+    background-color: #1c1c27;
+    cursor: pointer;
+}
+
+.contenedor-carrito {
+    position: relative;
+    padding-bottom: 47px;
+}
+
+.contenedor-carrito .total {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 18px;
 }
