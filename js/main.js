@@ -112,4 +112,7 @@ function sumarTotal(carrito) {
     return total;
 }
 
-mostrarProductos(productos);
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarProductos(productos);
+});
+
